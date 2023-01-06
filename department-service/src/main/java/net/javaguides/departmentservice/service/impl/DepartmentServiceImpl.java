@@ -20,14 +20,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     public DepartmentDto saveDepartment(DepartmentDto departmentDto) {
 
         //Convert department dto to department jpa entity
-        //Department department = DepartmentMapper.mapToDepartment(departmentDto);
-        Department department = AutoDepartmentMapper.MAPPER.mapToDepartment(departmentDto);
+        Department department = DepartmentMapper.mapToDepartment(departmentDto);
+        //Department department = AutoDepartmentMapper.MAPPER.mapToDepartment(departmentDto);
 
         Department savedDepartment = departmentRepository.save(department);
 
-        //DepartmentDto savedDepartmentDto = DepartmentMapper.mapToDepartmentDto(savedDepartment);
+        DepartmentDto savedDepartmentDto = DepartmentMapper.mapToDepartmentDto(savedDepartment);
 
-        DepartmentDto savedDepartmentDto = AutoDepartmentMapper.MAPPER.mapToDepartmentDto(savedDepartment);
+        //DepartmentDto savedDepartmentDto = AutoDepartmentMapper.MAPPER.mapToDepartmentDto(savedDepartment);
 
         return savedDepartmentDto;
     }
@@ -37,8 +37,9 @@ public class DepartmentServiceImpl implements DepartmentService {
         Department department = departmentRepository.findByDepartmentCode(departmentCode).orElseThrow(
                 () -> new ResourceNotFoundException("Department", "code", departmentCode)
         );
-        // DepartmentDto departmentDto = DepartmentMapper.mapToDepartmentDto(department);
+        DepartmentDto departmentDto = DepartmentMapper.mapToDepartmentDto(department);
 
-        return AutoDepartmentMapper.MAPPER.mapToDepartmentDto(department);
+        //return AutoDepartmentMapper.MAPPER.mapToDepartmentDto(department);
+        return departmentDto;
     }
 }
